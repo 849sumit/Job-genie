@@ -3,15 +3,16 @@ from unittest import result
 
 from flask import Flask, request, jsonify
 
+import userDashboard
+
 from job_genie_backend.database import CheckCredential, InsertData
 from job_genie_backend.schemas import UserSignup
 
-from flask import Flask, request, jsonify
-from flask_cors import CORS  # You'll need this for React
+from flask import Blueprint
+user_login_bp = Blueprint('userlogin', __name__)
+user_signup_bp = Blueprint('userSingup', __name__)
 
-app = Flask(__name__)
-
-@app.route('/signUp', methods=['POST'])
+@user_signup_bp.route('/signUp', methods=['POST'])
 def sign_up():
     user = request.get_json() 
     
@@ -33,7 +34,7 @@ def sign_up():
     
     return jsonify({'message': 'User created successfully'}), 201
 
-@app.route('/login', methods=['GET'])
+@user_login_bp.route('/login', methods=['GET'])
 def login():
     print(request.args)
     email = request.args.get('email')
@@ -45,5 +46,5 @@ def login():
     
     return jsonify({'message': 'Login successful'}), 200
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+
 def greet(name: str = "World") -> str:
     """Return a greeting message."""
     return f"Hello, {name}! Welcome to Job Genie Backend."
